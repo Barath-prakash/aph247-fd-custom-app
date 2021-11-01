@@ -6,7 +6,7 @@ import Content from '../Content';
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: '/graphql', fetch }),
-  cache: new InMemoryCache()
+  cache: new InMemoryCache(),
 });
 
 test('renders with empty data', () => {
@@ -18,20 +18,21 @@ test('renders with empty data', () => {
       error="Error occured"
       setLoading={jest.fn}
       setError={jest.fn}
-    />
+    />,
   );
 });
 
 test('renders with empty data for first element', () => {
-  render(() => act(() => {
-    <Content
-      appClient={jest.fn}
-      apolloClient={client}
-      loading={truw}
-      error=""
-      setLoading={jest.fn}
-      setError={jest.fn}
-    />
-  }));
+  render(() =>
+    act(() => {
+      <Content
+        appClient={jest.fn}
+        apolloClient={client}
+        loading={truw}
+        error=""
+        setLoading={jest.fn}
+        setError={jest.fn}
+      />;
+    }),
+  );
 });
-

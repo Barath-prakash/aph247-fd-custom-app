@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 
-const useScript = url => {
-
+const useScript = (url) => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
@@ -14,7 +13,7 @@ const useScript = url => {
 
     return () => {
       document.head.removeChild(script);
-    }
+    };
   }, [url]);
 };
 

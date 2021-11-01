@@ -16,13 +16,16 @@ const App = ({ apolloClient }) => {
 
   useEffect(() => {
     if (loading) {
-      app.initialized().then(client => {
-        window.client = client;
-        client.events.on('app.activated', setClient(client));
-      }).catch(err => {
-        setError('App initialize error: ' + err);
-      })
-    };
+      app
+        .initialized()
+        .then((client) => {
+          window.client = client;
+          client.events.on('app.activated', setClient(client));
+        })
+        .catch((err) => {
+          setError('App initialize error: ' + err);
+        });
+    }
   }, [loading]);
 
   return error ? (
@@ -37,6 +40,6 @@ const App = ({ apolloClient }) => {
       setError={setError}
     />
   );
-}
+};
 
 export default App;

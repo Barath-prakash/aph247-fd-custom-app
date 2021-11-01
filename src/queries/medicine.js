@@ -1,4 +1,4 @@
-import { gql } from "graphql-tag"
+import { gql } from 'graphql-tag';
 
 export const GET_MEDICINE_ORDER_OMS_DETAILS_WITH_ADDRESS = gql`
   query getMedicineOrderOMSDetailsWithAddress(
