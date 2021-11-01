@@ -63,6 +63,7 @@ const Content = ({
           variables: { orderAutoId },
         });
       setLoading(loaded);
+      console.log('medicineOrderData', medicineOrderData);
       init(medicineOrderData);
     } catch (err) {
       setError('Fetch medical order error: ' + err.message);
@@ -72,7 +73,7 @@ const Content = ({
 
   async function fetchTicketInfo(client) {
     try {
-      const { ticket = null } = await client?.data.get('ticket');
+      const { ticket } = await client?.data.get('ticket');
       const customData = ticket?.custom_fields;
       if (customData) {
         setOrder((prevState) => ({
@@ -86,8 +87,8 @@ const Content = ({
           },
         }));
       }
-      const orderAutoId = ticket?.custom_fields?.cf_orderidappointmentid;
-      console.log({ orderAutoId });
+      const orderAutoId = customData?.cf_orderidappointmentid;
+      // console.log({ orderAutoId });
       orderAutoId ? fetchMedicineOrder(orderAutoId) : setLoading(false);
     } catch (err) {
       setError('Load ticket error: ' + err);
