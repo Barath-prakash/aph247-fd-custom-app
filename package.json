@@ -42,17 +42,26 @@
     "react-scripts": "4.0.0"
   },
   "scripts": {
-    "test": "jest --coverage"
+    "test": "jest --coverage",
+    "lint": "eslint src --color --ext=js,jsx,ts,tsx --fix",
+    "prettier": "prettier src -check --write"
   },
   "jest": {
     "roots": [
       "./app/src"
     ]
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
   "lint-staged": {
     "*.{js,jsx,ts,tsx}": [
-      "prettier --write",
-      "eslint --fix"
+      "eslint src --fix"
+    ],
+    "*.{js,jsx,ts,tsx,json,md,html}": [
+      "prettier src --write"
     ]
   }
 }
