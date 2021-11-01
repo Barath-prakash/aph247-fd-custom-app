@@ -1,0 +1,22 @@
+{
+  "platform-version": "2.2",
+  "product": {
+    "freshdesk": {
+      "location": {
+        "ticket_sidebar": {
+          "url": "index.html",
+          "icon": "icon.svg"
+        }
+      }
+    }
+  },
+  "whitelisted-domains": [
+    "https://apollo247-test.freshdesk.com",
+    "https://apollo247.freshdesk.com",
+    "https://qa4api.apollo247.com"
+  ],
+  "engines": {
+    "node": "12.22.7",
+    "fdk": "7.1.0"
+  }
+}
