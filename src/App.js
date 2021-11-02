@@ -29,7 +29,7 @@ const App = ({ apolloClient }) => {
   }, [loading]);
 
   return error ? (
-    <div style={{ textAlign: 'center', padding: 10, color: 'red' }}>{error}</div>
+    <div className="text-center p-3 text-danger">{error}</div>
   ) : (
     <Content
       appClient={appClient}
