@@ -1,34 +1,19 @@
 import React, { useState, useEffect } from 'react';
-import { GET_MEDICINE_ORDER_OMS_DETAILS_WITH_ADDRESS } from '../queries/medicine.js';
+import { GET_MEDICINE_ORDER_OMS_DETAILS_WITH_ADDRESS } from '../queries/medicine';
 import { initialState } from '../utils/variables';
-import ContentList from './ContentList.js';
+import ContentList from './ContentList';
 import Loader from './Loader';
-import NoOrder from './NoOrder.js';
+import NoOrder from './NoOrder';
 
-const Content = ({
-  appClient,
-  apolloClient,
-  loading,
-  error,
-  setLoading,
-  setError,
-}) => {
+const Content = ({ appClient, apolloClient, loading, error, setLoading, setError }) => {
   const [order, setOrder] = useState(initialState);
-
-  useEffect(() => {
-    if (appClient) {
-      fetchTicketInfo(appClient);
-    }
-  }, [appClient]);
 
   function init(medicalOrderData) {
     const {
-      getMedicineOrderOMSDetailsWithAddress: {
-        medicineOrderDetails: orderData,
-      },
+      getMedicineOrderOMSDetailsWithAddress: { medicineOrderDetails: orderData },
     } = medicalOrderData;
     const { medicineOrderPayments, medicineOrderLineItems } = orderData;
-    setOrder((prevState) => ({
+    setOrder(prevState => ({
       ...prevState,
       id: orderData?.id,
       orderAutoId: orderData?.orderAutoId,
@@ -57,26 +42,24 @@ const Content = ({
 
   async function fetchMedicineOrder(orderAutoId) {
     try {
-      const { data: medicineOrderData, loading: loaded } =
-        await apolloClient.query({
-          query: GET_MEDICINE_ORDER_OMS_DETAILS_WITH_ADDRESS,
-          variables: { orderAutoId },
-        });
+      const { data: medicineOrderData, loading: loaded } = await apolloClient.query({
+        query: GET_MEDICINE_ORDER_OMS_DETAILS_WITH_ADDRESS,
+        variables: { orderAutoId },
+      });
       setLoading(loaded);
-      console.log('medicineOrderData', medicineOrderData);
       init(medicineOrderData);
     } catch (err) {
-      setError('Fetch medical order error: ' + err.message);
+      setError(`Fetch medical order error: ${err.message}`);
       setLoading(false);
     }
   }
 
   async function fetchTicketInfo(client) {
     try {
-      const { ticket } = await client?.data.get('ticket');
+      const { ticket } = await client.data.get('ticket');
       const customData = ticket?.custom_fields;
       if (customData) {
-        setOrder((prevState) => ({
+        setOrder(prevState => ({
           ...prevState,
           patient: {
             ...prevState.patient,
@@ -88,21 +71,22 @@ const Content = ({
         }));
       }
       const orderAutoId = customData?.cf_orderidappointmentid;
-      // console.log({ orderAutoId });
       orderAutoId ? fetchMedicineOrder(orderAutoId) : setLoading(false);
     } catch (err) {
-      setError('Load ticket error: ' + err);
+      setError(`Load ticket error: ${err}`);
       setLoading(false);
     }
   }
 
+  useEffect(() => {
+    if (appClient) {
+      fetchTicketInfo(appClient);
+    }
+  }, [appClient]);
+
   return (
     <>
-      <Loader
-        loading={loading}
-        orderId={order?.id}
-        reloadPage={() => window?.location?.reload()}
-      />
+      <Loader loading={loading} orderId={order?.id} reloadPage={() => window?.location?.reload()} />
       <ContentList loading={loading} error={error} order={order} />
       <NoOrder loading={loading} error={error} orderId={order?.id} />
     </>

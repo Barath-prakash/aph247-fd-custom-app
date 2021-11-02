@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 
-const useScript = (url) => {
+const useScript = url => {
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
     const script = document.createElement('script');
     script.src = url;
-    script.addEventListener('load', () => setLoaded(true));
+    script.addEventListener('load', () => !loaded && setLoaded(true));
     script.defer = true;
 
     document.head.appendChild(script);

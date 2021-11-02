@@ -3,7 +3,7 @@ import { render } from '@testing-library/react';
 import NoOrder from '../NoOrder';
 
 test('renders with return null', () => {
-  render(<NoOrder loading={true} error="" orderId="" />);
+  render(<NoOrder loading error="" orderId="" />);
 });
 
 test('renders with return no data found element', () => {

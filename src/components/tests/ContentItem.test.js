@@ -4,23 +4,11 @@ import ContentItem from '../ContentItem';
 import { contentHeadingList, initialState } from '../../utils/variables';
 
 test('renders with empty data', () => {
-  render(
-    <ContentItem
-      index={0}
-      order={initialState}
-      item={{ labelKey: '', labelValue: '', isHeader: false }}
-    />,
-  );
+  render(<ContentItem index={0} order={initialState} item={{ labelKey: '', labelValue: '', isHeader: false }} />);
 });
 
 test('renders with empty data for first element', () => {
-  render(
-    <ContentItem
-      index={0}
-      order={initialState}
-      item={{ labelKey: '', labelValue: '', isHeader: true }}
-    />,
-  );
+  render(<ContentItem index={0} order={initialState} item={{ labelKey: '', labelValue: '', isHeader: true }} />);
 });
 
 test('renders with valid header data', () => {
@@ -33,7 +21,7 @@ test('renders with valid header data', () => {
         labelValue: contentHeadingList[0]?.labelValue,
         isHeader: contentHeadingList[0]?.isHeader,
       }}
-    />,
+    />
   );
 });
 
@@ -47,7 +35,7 @@ test('renders with valid non-header data', () => {
         labelValue: contentHeadingList[1]?.labelValue,
         isHeader: contentHeadingList[1]?.isHeader,
       }}
-    />,
+    />
   );
 });
 
@@ -61,6 +49,6 @@ test('renders with valid non-header data', () => {
         labelValue: contentHeadingList[9]?.labelValue,
         isHeader: contentHeadingList[9]?.isHeader,
       }}
-    />,
+    />
   );
 });

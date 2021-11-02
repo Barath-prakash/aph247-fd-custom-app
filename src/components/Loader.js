@@ -7,12 +7,7 @@ const Loader = ({ loading, orderId, reloadPage }) => {
       <div style={{ textAlign: 'center' }}>
         <CircularProgress color="inherit" size={30} />
         <div style={{ marginTop: 10 }}>Page loading for long time ?</div>
-        <a
-          data-testid="a-tag"
-          hre="#"
-          onClick={() => reloadPage(true)}
-          style={{ cursor: 'pointer' }}
-        >
+        <a data-testid="a-tag" hre="#" onClick={() => reloadPage(true)} style={{ cursor: 'pointer' }}>
           Reload
         </a>
       </div>

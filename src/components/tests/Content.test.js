@@ -2,9 +2,9 @@ import React from 'react';
 import { render, act } from '@testing-library/react';
 import fetch from 'cross-fetch';
 import { ApolloClient, HttpLink, InMemoryCache } from '@apollo/client';
+import { MockedProvider } from '@apollo/client/testing';
 import Content from '../Content';
 import { GET_MEDICINE_ORDER_OMS_DETAILS_WITH_ADDRESS } from '../../queries/medicine';
-import { MockedProvider } from '@apollo/client/testing';
 
 const client = new ApolloClient({
   link: new HttpLink({ uri: '/graphql', fetch }),
@@ -78,8 +78,8 @@ const mocks = [
 test('renders with empty data', () => {
   const appClient = {
     data: {
-      get: (name) =>
-        new Promise((resolve) => {
+      get: name =>
+        new Promise(resolve => {
           resolve({
             [name]: {
               custom_fields: {
@@ -102,15 +102,15 @@ test('renders with empty data', () => {
       error="Error occured"
       setLoading={jest.fn}
       setError={jest.fn}
-    />,
+    />
   );
 });
 
 test('renders with errors', () => {
   const appClient = {
     data: {
-      get: (name) =>
-        new Promise((resolve) => {
+      get: name =>
+        new Promise(resolve => {
           reject({
             statusCode: 500,
             message: 'Somthing went wrong',
@@ -120,22 +120,15 @@ test('renders with errors', () => {
     },
   };
   const component = render(
-    <Content
-      appClient={appClient}
-      apolloClient={client}
-      loading={true}
-      error=""
-      setLoading={jest.fn}
-      setError={jest.fn}
-    />,
+    <Content appClient={appClient} apolloClient={client} loading error="" setLoading={jest.fn} setError={jest.fn} />
   );
 });
 
 test('renders with empty data for first element', () => {
   const appClient = {
     data: {
-      get: (name) =>
-        new Promise((resolve) => {
+      get: name =>
+        new Promise(resolve => {
           resolve({
             [name]: {
               custom_fields: {
@@ -160,6 +153,6 @@ test('renders with empty data for first element', () => {
         setLoading={jest.fn}
         setError={jest.fn}
       />
-    </MockedProvider>,
+    </MockedProvider>
   );
 });

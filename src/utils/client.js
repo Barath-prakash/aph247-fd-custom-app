@@ -5,12 +5,11 @@ import { APOLLO_247_AUTH_TOKEN, APOLLO_247_ENDPOINT } from './config';
 
 let apolloClient;
 const getClient = () => {
-  const errorLink = onError((error) => {
+  const errorLink = onError(error => {
     const { graphQLErrors, operation, forward } = error;
     if (graphQLErrors) {
       const unauthenticatedError = graphQLErrors.some(
-        (gqlError) =>
-          gqlError.extensions && gqlError.extensions.code === 'UNAUTHENTICATED',
+        gqlError => gqlError.extensions && gqlError.extensions.code === 'UNAUTHENTICATED'
       );
       if (unauthenticatedError) {
         console.log('unauthenticatedError', unauthenticatedError);

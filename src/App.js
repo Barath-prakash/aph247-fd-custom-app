@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import Content from './components/Content.js';
+import Content from './components/Content';
 
 const App = ({ apolloClient }) => {
   const [loading, setLoading] = useState(false);
@@ -16,20 +16,20 @@ const App = ({ apolloClient }) => {
 
   useEffect(() => {
     if (loading) {
-      app
-        .initialized()
-        .then((client) => {
+      window?.app
+        ?.initialized()
+        .then(client => {
           window.client = client;
           client.events.on('app.activated', setClient(client));
         })
-        .catch((err) => {
-          setError('App initialize error: ' + err);
+        .catch(err => {
+          setError(`App initialize error: ${err}`);
         });
     }
   }, [loading]);
 
   return error ? (
-    <div style={{ textAlign: 'center', padding: 10 }}>{error}</div>
+    <div style={{ textAlign: 'center', padding: 10, color: 'red' }}>{error}</div>
   ) : (
     <Content
       appClient={appClient}
