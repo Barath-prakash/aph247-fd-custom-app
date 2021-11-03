@@ -37,7 +37,7 @@ const LabTestsOrder = ({ patient, orderInfo, orderType }) => {
         if (el.isList) {
           const value = (
             <div>
-              {order[el.labelKey].map((dto, k) => {
+              {order[el.labelKey]?.map((dto, k) => {
                 return <div key={k}>Name: {dto.itemName}</div>;
               })}
             </div>
