@@ -1,6 +1,6 @@
 import React from 'react';
 import { render } from '@testing-library/react';
-import NoOrder from '../NoOrder';
+import NoOrder from '../common/NoOrder';
 
 test('renders with return null', () => {
   render(<NoOrder loading error="" orderId="" />);

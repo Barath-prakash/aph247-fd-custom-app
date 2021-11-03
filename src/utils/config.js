@@ -7,3 +7,5 @@ export const domainEndpoints = {
   'https://apollo247-test.freshdesk.com': APOLLO_QA4_247_ENDPOINT,
   'https://apollo247.freshdesk.com': APOLLO_PROD_247_ENDPOINT,
 };
+
+export const liveQaAppUrl = 'https://d3h0owdjgzys62.cloudfront.net';

@@ -1,5 +1,12 @@
-export const initialState = {
+export const typeNames = {
+  MEDICINES: 'Medicines',
+  LAB_TESTS: 'Lab Tests',
+  DOCTOR_APPOINMENTS: 'Doctor Appointments',
+};
+
+export const medicineOrderState = {
   id: '',
+  type: '',
   orderAutoId: null,
   billNumber: '',
   devliveryCharges: 0,
@@ -39,8 +46,8 @@ export const initialState = {
   },
 };
 
-export const contentHeadingList = [
-  { labelKey: '', labelValue: 'Medicine Order', isHeader: true },
+export const medicineOrderKeyList = [
+  { labelKey: '', labelValue: `${typeNames?.MEDICINES} Order`, isHeader: true },
   { labelKey: 'orderAutoId', labelValue: 'Order Id' },
   // { labelKey: 'billNumber', labelValue: 'Bill number' },
   { labelKey: 'orderType', labelValue: 'Order type' },
